@@ -1,35 +1,24 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+
+// 4 Custom rook 
+import { useFetch } from './hooks/useFetch';
 
 const url = "http://localhost:3000/products";
 
 function App() {
   const [products, setProducts] = useState([]);
+
+  // 4 - custom 
+  const { data: items } = useFetch(url); 
+  console.log(items)
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
-
-  // Fetch data
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
-        setProducts(data);
-        console.log(data);
-
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+  
   // Add product
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newProduct = { name, price: parseFloat(price) };
-    console.log(newProduct)
 
     try {
       await fetch(url, {
@@ -37,6 +26,8 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newProduct),
       });
+
+      // 3 - Carregamento dinamico
 
       setProducts([...products, newProduct]);
       setName("");
@@ -50,7 +41,7 @@ function App() {
     <div className="App">
       <h1>Product List</h1>
       <ul>
-        {products.map((product) => (
+        {items && items.map((product) => (
           <li key={product.id}>
             {product.name || "No name"} - R$ {product.price || "Price not available"}
           </li>
