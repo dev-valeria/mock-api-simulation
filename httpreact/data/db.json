@@ -1,19 +1,49 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Camisa",
-      "prince": 59.9
+      "price": 59.9
     },
     {
-      "id": 2,
-      "name": "calca vermelha",
-      "prince": 90
+      "id": "2",
+      "name": "Calça vermelha",
+      "price": 90
     },
     {
-      "id": 3,
-      "name": "Bone aba reta",
-      "prince": 29.9
+      "id": "3",
+      "name": "Boné aba reta",
+      "price": 29.9
+    },
+    {
+      "id": "f85a",
+      "name": "Produto desconhecido",
+      "price": 0
+    },
+    {
+      "id": "f0f8",
+      "name": "",
+      "price": null
+    },
+    {
+      "id": "6766",
+      "name": "",
+      "price": null
+    },
+    {
+      "id": "6ce1",
+      "name": "Valéria Melo",
+      "price": 0
+    },
+    {
+      "id": "e10f",
+      "name": "Valéria Melo",
+      "price": 11
+    },
+    {
+      "id": "b35a",
+      "name": "ssss",
+      "price": 222
     }
   ]
 }
