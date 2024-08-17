@@ -53,7 +53,10 @@ function App() {
             Price:
             <input type="number" value={price} name='price' onChange={(e) => setPrice(e.target.value)} />
           </label>
-          <button type="submit">Criar</button>
+          {loading && <button type="submit" disabled value="Aguarde">Criar</button>}
+         { !loading && <button type="submit">Criar</button>
+
+ }
         </form>
       </div>
     </div>
