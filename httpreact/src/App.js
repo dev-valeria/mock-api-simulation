@@ -10,33 +10,26 @@ function App() {
   const [products, setProducts] = useState([]);
 
   // 4 - custom 
-  const { data: items } = useFetch(url); 
-  console.log(items)
+  const { data: items, httpConfig } = useFetch(url); 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   
   // Add product
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newProduct = { name, price: parseFloat(price) };
+    const product = {
+      name,
+      price,
+    };
 
-    try {
-      await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newProduct),
-      });
+    // 5 refatorando post
 
-      // 3 - Carregamento dinamico
+    httpConfig(product, "POST");
+    setName("");
+    setPrice("")
 
-      setProducts([...products, newProduct]);
-      setName("");
-      setPrice("");
-    } catch (error) {
-      console.error("Error adding product:", error);
-    }
   }
-
   return (
     <div className="App">
       <h1>Product List</h1>
