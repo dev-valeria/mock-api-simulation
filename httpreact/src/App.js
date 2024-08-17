@@ -7,7 +7,7 @@ import { useFetch } from './hooks/useFetch';
 const url = "http://localhost:3000/products";
 
 function App() {
-  const [products, setProducts] = useState([]);
+  //const [products, setProducts] = useState([]);
 
   // 4 - custom 
   const { data: items, httpConfig, loading, error } = useFetch(url); 
@@ -31,37 +31,53 @@ function App() {
 
   }
   return (
-    <div className="App">
-      <h1>Product List</h1>
-      {loading && <p>Carregando dados...</p>}
-      {error && <p>{error}</p>}
-      {error && (
-        <ul>
-        {items && items.map((product) => (
+  <div className="App">
+    <h1>Product List</h1>
+    
+    {loading && <p>Carregando dados...</p>}
+    {error && <p>{error}</p>}
+    
+    {!loading && !error && items && (
+      <ul>
+        {items.map((product) => (
           <li key={product.id}>
             {product.name || "No name"} - R$ {product.price || "Price not available"}
           </li>
         ))}
       </ul>
-      )}
-      <div className='add-product'>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Name:
-            <input type="text" value={name} name='name' onChange={(e) => setName(e.target.value)} />
-          </label>
-          <label>
-            Price:
-            <input type="number" value={price} name='price' onChange={(e) => setPrice(e.target.value)} />
-          </label>
-          {loading && <button type="submit" disabled value="Aguarde">Criar</button>}
-         { !loading && <button type="submit">Criar</button>
-
- }
-        </form>
-      </div>
+    )}
+    
+    <div className='add-product'>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input 
+            type="text" 
+            value={name} 
+            name='name' 
+            onChange={(e) => setName(e.target.value)} 
+          />
+        </label>
+        
+        <label>
+          Price:
+          <input 
+            type="number" 
+            value={price} 
+            name='price' 
+            onChange={(e) => setPrice(e.target.value)} 
+          />
+        </label>
+        
+        {loading ? (
+          <button type="submit" disabled value="Aguarde">Criar</button>
+        ) : (
+          <button type="submit">Criar</button>
+        )}
+      </form>
     </div>
-  );
+  </div>
+);
 }
 
 export default App;
